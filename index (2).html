@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PolyLearn - Belajar Bahasa</title>
+    <link rel="stylesheet" href="language-style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">🌍</span>
+                <span class="logo-text">PolyLearn</span>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn" onclick="showSection('home')">Beranda</button>
+                <button class="nav-btn" onclick="showSection('lessons')">Pelajaran</button>
+                <button class="nav-btn" onclick="showSection('progress')">Progress</button>
+                <button class="subscription-btn" onclick="showSubscription()">
+                    <span id="userStatus">Free</span> ⭐
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <h1 class="hero-title">Belajar 5 Bahasa Dunia</h1>
+            <p class="hero-subtitle">Dengan audio native speaker dan metode interaktif</p>
+            
+            <div class="language-grid">
+                <div class="language-card" onclick="selectLanguage('english')">
+                    <div class="flag">🇬🇧</div>
+                    <h3>Bahasa Inggris</h3>
+                    <p>150+ Pelajaran</p>
+                </div>
+                <div class="language-card" onclick="selectLanguage('korean')">
+                    <div class="flag">🇰🇷</div>
+                    <h3>Bahasa Korea</h3>
+                    <p>120+ Pelajaran</p>
+                </div>
+                <div class="language-card" onclick="selectLanguage('arabic')">
+                    <div class="flag">🇸🇦</div>
+                    <h3>Bahasa Arab</h3>
+                    <p>100+ Pelajaran</p>
+                </div>
+                <div class="language-card" onclick="selectLanguage('japanese')">
+                    <div class="flag">🇯🇵</div>
+                    <h3>Bahasa Jepang</h3>
+                    <p>130+ Pelajaran</p>
+                </div>
+                <div class="language-card" onclick="selectLanguage('russian')">
+                    <div class="flag">🇷🇺</div>
+                    <h3>Bahasa Rusia</h3>
+                    <p>90+ Pelajaran</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lessons Section -->
+    <section id="lessons" class="section">
+        <div class="container">
+            <div class="section-header">
+                <button class="back-btn" onclick="showSection('home')">← Kembali</button>
+                <h2 id="languageTitle">Pilih Bahasa</h2>
+            </div>
+
+            <div class="lessons-container" id="lessonsContainer">
+                <!-- Lessons will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Section -->
+    <section id="progress" class="section">
+        <div class="container">
+            <h2>Progress Belajar</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-value" id="totalLessons">0</div>
+                    <div class="stat-label">Total Pelajaran</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-value" id="completedLessons">0</div>
+                    <div class="stat-label">Selesai</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value" id="streak">0</div>
+                    <div class="stat-label">Hari Beruntun</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value" id="points">0</div>
+                    <div class="stat-label">Poin</div>
+                </div>
+            </div>
+
+            <div class="progress-languages">
+                <h3>Progress per Bahasa</h3>
+                <div id="languageProgress"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lesson Detail Modal -->
+    <div id="lessonModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Pelajaran</h2>
+                <button class="close-btn" onclick="closeLessonModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="lesson-item" id="lessonContent">
+                    <!-- Lesson content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Subscription Modal -->
+    <div id="subscriptionModal" class="modal">
+        <div class="modal-content subscription-modal">
+            <div class="modal-header">
+                <h2>Upgrade ke Premium</h2>
+                <button class="close-btn" onclick="closeSubscription()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="subscription-intro">
+                    <h3>Dapatkan Akses Penuh!</h3>
+                    <p>Buka semua pelajaran dan fitur premium</p>
+                </div>
+
+                <div class="pricing-cards">
+                    <div class="pricing-card">
+                        <div class="plan-badge">Free</div>
+                        <h3>Paket Gratis</h3>
+                        <div class="price">Rp 0<span>/bulan</span></div>
+                        <ul class="features">
+                            <li>✅ 5 Pelajaran per bahasa</li>
+                            <li>✅ Audio basic</li>
+                            <li>❌ Pelajaran advanced</li>
+                            <li>❌ Download offline</li>
+                            <li>❌ Tanpa iklan</li>
+                        </ul>
+                        <button class="plan-btn active">Paket Aktif</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="plan-badge popular">Popular</div>
+                        <h3>Paket Premium</h3>
+                        <div class="price">Rp 49.000<span>/bulan</span></div>
+                        <ul class="features">
+                            <li>✅ Semua pelajaran</li>
+                            <li>✅ Audio HD native speaker</li>
+                            <li>✅ Pelajaran advanced</li>
+                            <li>✅ Download offline</li>
+                            <li>✅ Tanpa iklan</li>
+                        </ul>
+                        <button class="plan-btn" onclick="subscribe('premium')">Berlangganan</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="plan-badge">VIP</div>
+                        <h3>Paket Lifetime</h3>
+                        <div class="price">Rp 499.000<span>/sekali bayar</span></div>
+                        <ul class="features">
+                            <li>✅ Semua fitur premium</li>
+                            <li>✅ Akses selamanya</li>
+                            <li>✅ Update konten gratis</li>
+                            <li>✅ Sertifikat digital</li>
+                            <li>✅ Priority support</li>
+                        </ul>
+                        <button class="plan-btn" onclick="subscribe('lifetime')">Beli Sekarang</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <script src="language-script.js"></script>
+</body>
+</html>
